@@ -32,6 +32,64 @@
 python -m http.server 8000 -d dashboard
 ```
 
+## 평가 기준과 전체 점수
+
+아래 표는 모델 선택에 사용한 두-파일 실행 결과 전체입니다. 모든 행은 동일한 제한 평가 자료, 동일한 문자 정규화 규칙, 같은 표준어형·방언형 정답 기준으로 채점했습니다.
+
+- 평가 범위: 강원도 중·노년층 여성 2인 대화 2개 파일, 총 3.20분
+- 주 지표: 표준어형 CER, 방언형 CER. 둘 다 낮을수록 좋음
+- CER 처리: Unicode NFC 정규화 후 타임스탬프·화자 표기·문장부호·공백을 제외해 문자 단위로 계산
+- 시간: 두 파일을 다시 전사하는 데 걸린 시간. 장치·엔진·분할 방식이 다르므로 절대적인 실시간성 보장은 아님
+- 메모리: 해당 실행에서 관찰한 최대 프로세스 RAM 또는 VRAM
+
+`파일별 문맥` MOSS는 파일별 단서를 입력으로 받았으므로, 무문맥 모델과 완전히 같은 조건의 성능 순위가 아닙니다. 이 때문에 기본 MOSS와 공통 문맥 MOSS를 분리해 함께 표시합니다. Zipformer는 공백 복원이 불완전해 WER를 성능 비교에서 제외했습니다.
+
+<details>
+<summary>23개 실행 설정의 전체 비교표 열기</summary>
+
+| 모델 / 설정 | 장치 | 표준 CER | 방언 CER | 반복 전사 | 관찰 메모리 |
+| --- | --- | ---: | ---: | ---: | ---: |
+| MOSS-Transcribe-Diarize / 파일별 문맥 | CUDA | **12.38%** | **15.32%** | 49.18초 | 2,448MB VRAM |
+| MOSS-Transcribe-Diarize / 공통 문맥 | CUDA | 13.03% | 15.73% | 49.58초 | 2,454MB VRAM |
+| MOSS-Transcribe-Diarize / 기본 | CUDA | 13.84% | 17.19% | 44.70초 | 2,422MB VRAM |
+| Zipformer 174M / CPU int8, chunk 64 | CPU | 14.72% | 17.84% | 15.41초 | 795MB RAM |
+| faster-whisper large-v3 / float16 | CUDA | 14.73% | 19.22% | 20.04초 | 3,701MB VRAM |
+| Zipformer 174M / CPU int8, chunk 32 | CPU | 16.67% | 19.22% | 18.32초 | 784MB RAM |
+| faster-whisper large-v3-turbo / float16 | CUDA | 16.91% | 20.27% | 4.59초 | 2,033MB VRAM |
+| Fun-ASR MLT Nano / VAD | CUDA | 18.04% | 21.40% | 41.40초 | 3,644MB VRAM |
+| Zipformer 174M / CPU int8, chunk 16 | CPU | 18.29% | 20.76% | 24.18초 | 779MB RAM |
+| Nemotron 3.5 ASR 0.6B | CUDA | 19.01% | 21.57% | 5.56초 | 1,862MB VRAM |
+| Qwen3-ASR 1.7B | CUDA | 19.85% | 23.61% | 41.08초 | 5,915MB VRAM |
+| Qwen3-ASR 0.6B | CUDA | 23.47% | 25.87% | 54.25초 | 4,031MB VRAM |
+| Zipformer 72M / CPU int8, chunk 64 | CPU | 31.91% | 33.75% | 12.74초 | 701MB RAM |
+| wav2vec2 Korean senior | CUDA | 43.96% | 44.12% | 0.52초 | 1,653MB VRAM |
+| local wav2vec2 XLS-R 300M / LM 미적용 | CUDA | 55.63% | 54.83% | 0.53초 | 1,659MB VRAM |
+| Fun-ASR MLT Nano / 기본 | CUDA | 61.39% | 63.46% | 18.00초 | 5,095MB VRAM |
+| wav2vec2 large XLSR Korean | CUDA | 63.26% | 62.70% | 0.51초 | 1,659MB VRAM |
+| Korean Whisper turbo / 20초 분할 | CUDA | 72.46% | 72.75% | 3.90초 | 2,058MB VRAM |
+| local Whisper small Zeroth | CUDA | 74.25% | 76.48% | 9.22초 | 548MB VRAM |
+| Korean Whisper turbo / 반복 억제 | CUDA | 79.37% | 79.66% | 2.88초 | 2,096MB VRAM |
+| local Whisper Turbo Ko v0.0.3 | CUDA | 83.24% | 86.48% | 6.72초 | 1,599MB VRAM |
+| local Whisper medium Zeroth | CUDA | 125.36% | 126.39% | 9.57초 | 1,622MB VRAM |
+| Korean Whisper turbo / 기본 | CUDA | 130.71% | 130.85% | 5.84초 | 2,063MB VRAM |
+
+</details>
+
+기계가 읽을 수 있는 전체 값과 각 행의 비교 주의사항은 [집계 JSON](results/model-summary.json), [CSV](results/model-summary.csv), [정적 대시보드](dashboard/index.html)에 있습니다.
+
+## 예시를 공개하지 않는 이유
+
+실제 평가에 쓴 AI-Hub 음성·정답 전사·모델 출력은 제한 자료의 파생물입니다. 짧은 문장만 잘라 익명화해도 원문 재배포나 재식별 문제가 남을 수 있어, 점수표의 근거로 전사 예시를 공개하지 않습니다.
+
+대신 이 저장소는 다음을 공개합니다.
+
+- 어떤 자료 범위와 정답 변형을 사용했는지
+- CER/WER 정규화 규칙과 계산 코드
+- 모델별 설정, 처리 시간, 메모리, 집계 점수
+- 문맥 입력과 공백 복원처럼 비교를 왜곡할 수 있는 조건
+
+공개 가능한 오류 예시는 별도 동의를 받은 성인 역할극 녹음 또는 명시적으로 재배포 가능한 자료가 생긴 뒤에만 추가합니다. 그 예시는 실제 제한 평가의 점수를 증명하는 자료가 아니라, 제품 흐름과 오류 유형을 설명하는 별도 시연으로 표시해야 합니다.
+
 ## 이 결과가 말하는 것과 말하지 않는 것
 
 확인한 것:
