@@ -18,19 +18,15 @@
 
 파일별 문맥 설정은 다른 무문맥 모델과 완전히 동일한 조건이 아닙니다. 따라서 기본 MOSS, 공통 문맥 MOSS, 무문맥 기준선을 함께 기록했습니다.
 
-## 결과 보기
+## 공개 결과와 근거
 
-- [정적 모델 비교 워크벤치](dashboard/index.html)
 - [집계 결과 JSON](results/model-summary.json)
+- [집계 결과 CSV](results/model-summary.csv)
 - [모델·설정 레지스트리](docs/model-registry.md)
 - [평가 규칙](docs/evaluation-rules.md)
 - [데이터 접근·라이선스](DATA_SOURCES.md)
 
-브라우저에서 `dashboard/index.html`을 열면 저장된 결과를 볼 수 있습니다. 로컬 HTTP 서버가 필요하면 다음 명령을 사용합니다.
-
-```powershell
-python -m http.server 8000 -d dashboard
-```
+모든 사람이 먼저 읽어야 할 결과는 아래 README 표입니다. JSON과 CSV는 숫자를 다시 확인하거나 후속 비교를 추가할 때만 쓰는 보조 자료입니다.
 
 ## 평가 기준과 전체 점수
 
@@ -75,7 +71,7 @@ python -m http.server 8000 -d dashboard
 
 </details>
 
-기계가 읽을 수 있는 전체 값과 각 행의 비교 주의사항은 [집계 JSON](results/model-summary.json), [CSV](results/model-summary.csv), [정적 대시보드](dashboard/index.html)에 있습니다.
+기계가 읽을 수 있는 전체 값과 각 행의 비교 주의사항은 [집계 JSON](results/model-summary.json)과 [CSV](results/model-summary.csv)에 있습니다.
 
 ## 예시를 공개하지 않는 이유
 
