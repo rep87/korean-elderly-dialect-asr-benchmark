@@ -1,4 +1,4 @@
-"""Reject obvious restricted-data identifiers before publishing aggregate results."""
+"""Reject obvious restricted-data identifiers before publishing public documentation."""
 
 from __future__ import annotations
 
@@ -7,15 +7,15 @@ from pathlib import Path
 
 
 FORBIDDEN = ("ff01", "ff02", "c:\\", "data/aihub", "reference_text", "hypothesis", "audio_path")
-ALLOWED = {"model-summary.json", "model-summary.csv"}
 
 
 def main() -> None:
     root = Path(__file__).resolve().parents[1]
-    result_dir = root / "results"
+    public_paths = [root / "README.md", root / "DATA_SOURCES.md"]
+    public_paths.extend((root / "docs").rglob("*.md"))
     failed = False
-    for path in result_dir.rglob("*"):
-        if not path.is_file() or path.name not in ALLOWED:
+    for path in public_paths:
+        if not path.is_file():
             continue
         text = path.read_text(encoding="utf-8").lower()
         hits = [term for term in FORBIDDEN if term in text]
@@ -24,7 +24,7 @@ def main() -> None:
             failed = True
     if failed:
         raise SystemExit(1)
-    print("PASS: public result artifacts contain no blocked identifiers.")
+    print("PASS: public documentation contains no blocked identifiers.")
 
 
 if __name__ == "__main__":
