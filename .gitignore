@@ -1,0 +1,37 @@
+# Restricted or personal source material
+data/
+models/
+audio/
+transcripts/
+*.wav
+*.mp3
+*.flac
+*.m4a
+*.tar
+*.tar.gz
+*.zip
+
+# Credentials and local configuration
+.env
+.env.*
+*_apikey.txt
+*token*
+*secret*
+aihubshell*
+
+# Runtime artifacts
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.cache/
+output/
+logs/
+*.log
+
+# Never publish model outputs or source manifests from restricted data
+evaluation/outputs/
+evaluation/*/outputs/
+**/*transcript*.txt
+**/*manifest*.csv

@@ -1,0 +1,24 @@
+rank,model,configuration,device,standard_cer,dialect_cer,dialect_wer,seconds,ram_mb,vram_mb
+1,OpenMOSS-Team/MOSS-Transcribe-Diarize,file-specific context,CUDA,0.1238,0.1532,0.4041,49.18,,2447.5
+2,OpenMOSS-Team/MOSS-Transcribe-Diarize,common context,CUDA,0.1303,0.1573,0.4173,49.58,,2454.2
+3,OpenMOSS-Team/MOSS-Transcribe-Diarize,base,CUDA,0.1384,0.1719,0.4118,44.70,,2422.2
+4,kangkyu/icefall-asr-ko-streaming-zipformer-174m,"CPU int8, chunk 64",CPU,0.1472,0.1784,,15.41,794.5,
+5,Systran/faster-whisper-large-v3,CUDA float16,CUDA,0.1473,0.1922,,20.04,3562.1,3701.0
+6,mobiuslabsgmbh/faster-whisper-large-v3-turbo,CUDA float16,CUDA,0.1691,0.2027,,4.59,2159.5,2033.0
+7,kangkyu/icefall-asr-ko-streaming-zipformer-174m,"CPU int8, chunk 32",CPU,0.1667,0.1922,,18.32,783.8,
+8,FunAudioLLM/Fun-ASR-MLT-Nano-2512,VAD,CUDA,0.1804,0.2140,0.3569,41.40,,3644.1
+9,kangkyu/icefall-asr-ko-streaming-zipformer-174m,"CPU int8, chunk 16",CPU,0.1829,0.2076,,24.18,779.4,
+10,nvidia/nemotron-3.5-asr-streaming-0.6b,CUDA,CUDA,0.1901,0.2157,0.3681,5.56,,1861.5
+11,Qwen/Qwen3-ASR-1.7B,CUDA BF16-family,CUDA,0.1985,0.2361,0.4325,41.08,4821.5,5915.0
+12,Qwen/Qwen3-ASR-0.6B,CUDA BF16-family,CUDA,0.2347,0.2587,0.4766,54.25,2582.0,4031.0
+13,kangkyu/icefall-asr-ko-streaming-zipformer-72m,"CPU int8, chunk 64",CPU,0.3191,0.3375,,12.74,700.9,
+14,hyyoka/wav2vec2-xlsr-korean-senior,CUDA CTC,CUDA,0.4396,0.4412,0.7023,0.52,,1652.7
+15,local wav2vec2-xls-r-300m-korean-lm,"CUDA CTC, LM not applied",CUDA,0.5563,0.5483,0.8727,0.53,,1659.4
+16,FunAudioLLM/Fun-ASR-MLT-Nano-2512,base,CUDA,0.6139,0.6346,0.6912,18.00,,5094.9
+17,kresnik/wav2vec2-large-xlsr-korean,CUDA CTC,CUDA,0.6326,0.6270,0.8783,0.51,,1659.4
+18,ghost613/faster-whisper-large-v3-turbo-korean,20-second split,CUDA,0.7246,0.7275,,3.90,3803.7,2058.0
+19,local Whisper small Zeroth,CUDA,CUDA,0.7425,0.7648,0.4951,9.22,,548.4
+20,ghost613/faster-whisper-large-v3-turbo-korean,anti-repeat,CUDA,0.7937,0.7966,,2.88,3803.7,2096.0
+21,local Whisper Turbo Ko v0.0.3,CUDA,CUDA,0.8324,0.8648,0.9935,6.72,,1598.9
+22,local Whisper medium Zeroth,CUDA,CUDA,1.2536,1.2639,0.8341,9.57,,1621.8
+23,ghost613/faster-whisper-large-v3-turbo-korean,base,CUDA,1.3071,1.3085,,5.84,3803.8,2063.0
