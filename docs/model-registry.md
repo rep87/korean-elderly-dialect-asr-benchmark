@@ -4,7 +4,7 @@ This list distinguishes executed configurations from candidates. “Page checked
 
 | Model / configuration | Status | Official source | Notes |
 | --- | --- | --- | --- |
-| OpenMOSS MOSS-Transcribe-Diarize | Executed | [Hugging Face](https://huggingface.co/OpenMOSS-Team/MOSS-Transcribe-Diarize) | Model card records a 2026-07-09 release. Base, common-context, and file-specific-context runs are separated. |
+| OpenMOSS MOSS-Transcribe-Diarize | Executed | [Hugging Face](https://huggingface.co/OpenMOSS-Team/MOSS-Transcribe-Diarize) | Model card records a 2026-07-09 release and speaker-aware transcription/diarization capability. Base, common-context, and file-specific-context runs are separated; this project did not score diarization accuracy. |
 | faster-whisper large-v3 | Executed | [Hugging Face](https://huggingface.co/Systran/faster-whisper-large-v3) | CUDA float16 run. |
 | faster-whisper large-v3-turbo | Executed | [Hugging Face](https://huggingface.co/mobiuslabsgmbh/faster-whisper-large-v3-turbo) | CUDA float16 run. |
 | Zipformer Korean streaming 174M / 72M | Executed | [174M](https://huggingface.co/kangkyu/icefall-asr-ko-streaming-zipformer-174m), [72M](https://huggingface.co/kangkyu/icefall-asr-ko-streaming-zipformer-72m) | CPU int8 ONNX; chunk size changes are separate configurations. |
